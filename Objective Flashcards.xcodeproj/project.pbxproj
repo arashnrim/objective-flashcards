@@ -44,6 +44,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		496084592BBA9A0F009322EA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				49CF993E2BB6B67A0055FA2A /* Main.storyboard */,
+				49CF99462BB6B67B0055FA2A /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4960845A2BBA9A17009322EA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4960845B2BBA9A20009322EA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				49CF993B2BB6B6790055FA2A /* ViewController.h */,
+				49CF993C2BB6B67A0055FA2A /* ViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		49CF99292BB6B6790055FA2A = {
 			isa = PBXGroup;
 			children = (
@@ -63,15 +88,14 @@
 		49CF99342BB6B6790055FA2A /* Objective Flashcards */ = {
 			isa = PBXGroup;
 			children = (
+				4960845B2BBA9A20009322EA /* Controllers */,
+				4960845A2BBA9A17009322EA /* Models */,
+				496084592BBA9A0F009322EA /* Views */,
 				49CF99352BB6B6790055FA2A /* AppDelegate.h */,
 				49CF99362BB6B6790055FA2A /* AppDelegate.m */,
 				49CF99382BB6B6790055FA2A /* SceneDelegate.h */,
 				49CF99392BB6B6790055FA2A /* SceneDelegate.m */,
-				49CF993B2BB6B6790055FA2A /* ViewController.h */,
-				49CF993C2BB6B67A0055FA2A /* ViewController.m */,
-				49CF993E2BB6B67A0055FA2A /* Main.storyboard */,
 				49CF99442BB6B67B0055FA2A /* Assets.xcassets */,
-				49CF99462BB6B67B0055FA2A /* LaunchScreen.storyboard */,
 				49CF99492BB6B67B0055FA2A /* Info.plist */,
 				49CF994A2BB6B67B0055FA2A /* main.m */,
 				49CF99412BB6B67A0055FA2A /* Objective_Flashcards.xcdatamodeld */,

@@ -24,8 +24,38 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    // Creates height spacing for each row
     self.tableView.estimatedRowHeight = 180;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    // Adds a button at the top right with an alert to create a deck
+    UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"New Deck" style:UIBarButtonItemStylePlain target:self action:@selector(createDesk)];
+    self.navigationItem.rightBarButtonItem = button;
+}
+
+-(void)createDesk {
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:@"New Desk"
+                                message:@"What would you like to call your desk, and what's it about?"
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"Deck name";
+    }];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"Deck description";
+    }];
+    
+    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *actionCreate = [UIAlertAction actionWithTitle:@"Create" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // TODO: Add functionality here
+        NSLog(@"Created deck with title \"%@\" and description \"%@\".", alert.textFields[0].text, alert.textFields[1].text);
+    }];
+    
+    [alert addAction:actionCancel];
+    [alert addAction:actionCreate];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 // Determines the number of rows to fill in the table view. A required implementation under UITableViewDataSource.
@@ -45,23 +75,8 @@
 
 // Handles the event when users tap the row at the index specified.
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIAlertController *alert = [UIAlertController 
-                                alertControllerWithTitle:@"YIPPEE"
-                                message:[NSString stringWithFormat:@"The cell at the index %ld was selected.", (long)indexPath.row]
-                                preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *actionDismiss = [UIAlertAction 
-                                    actionWithTitle:@"YIPPEE"
-                                    style:UIAlertActionStyleDefault
-                                    handler:nil];
-    
-    [alert addAction:actionDismiss];
-    
-    [self presentViewController:alert animated:YES completion: nil];
+    // TODO: Handle flashcard deck selection
 }
-
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return 126.0;
-//}
 
 
 @end

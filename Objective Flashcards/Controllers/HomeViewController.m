@@ -22,6 +22,9 @@
     // Sets the delegate and data source of the table view to the VC
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.tableView.estimatedRowHeight = 180;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 // Determines the number of rows to fill in the table view. A required implementation under UITableViewDataSource.
@@ -32,7 +35,8 @@
 // Returns the table cell at the index specified. A required implementation under UITableView.
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    cell.textLabel.text = [NSString stringWithFormat:@"Cell %ld", (long)indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    cell.textLabel.text = [NSString stringWithFormat:@"Cell %ld", (long)indexPath.row];
     
     return cell;
 }
@@ -53,9 +57,9 @@
     [self presentViewController:alert animated:YES completion: nil];
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 126.0;
-}
+//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return 126.0;
+//}
 
 
 @end

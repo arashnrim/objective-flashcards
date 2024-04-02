@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49104B2D2BBBA8BA00FA885C /* DeckTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49104B2C2BBBA8BA00FA885C /* DeckTableViewCell.m */; };
 		49CF99372BB6B6790055FA2A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF99362BB6B6790055FA2A /* AppDelegate.m */; };
 		49CF993A2BB6B6790055FA2A /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF99392BB6B6790055FA2A /* SceneDelegate.m */; };
 		49CF993D2BB6B67A0055FA2A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF993C2BB6B67A0055FA2A /* HomeViewController.m */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		49104B2B2BBBA8BA00FA885C /* DeckTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeckTableViewCell.h; sourceTree = "<group>"; };
+		49104B2C2BBBA8BA00FA885C /* DeckTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeckTableViewCell.m; sourceTree = "<group>"; };
 		49CF99322BB6B6790055FA2A /* Objective Flashcards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Objective Flashcards.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49CF99352BB6B6790055FA2A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		49CF99362BB6B6790055FA2A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -49,6 +52,8 @@
 			children = (
 				49CF993E2BB6B67A0055FA2A /* Main.storyboard */,
 				49CF99462BB6B67B0055FA2A /* LaunchScreen.storyboard */,
+				49104B2B2BBBA8BA00FA885C /* DeckTableViewCell.h */,
+				49104B2C2BBBA8BA00FA885C /* DeckTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 				TargetAttributes = {
 					49CF99312BB6B6790055FA2A = {
 						CreatedOnToolsVersion = 15.3;
+						LastSwiftMigration = 1530;
 					};
 				};
 			};
@@ -173,6 +179,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49104B2D2BBBA8BA00FA885C /* DeckTableViewCell.m in Sources */,
 				49CF994B2BB6B67B0055FA2A /* main.m in Sources */,
 				49CF993D2BB6B67A0055FA2A /* HomeViewController.m in Sources */,
 				49CF99372BB6B6790055FA2A /* AppDelegate.m in Sources */,
@@ -324,6 +331,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HFYWW8ST8C;
@@ -342,6 +350,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.arash.dev.Objective-Flashcards";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Objective Flashcards/Models/Objective Flashcards-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -351,6 +362,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HFYWW8ST8C;
@@ -369,6 +381,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.arash.dev.Objective-Flashcards";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Objective Flashcards/Models/Objective Flashcards-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

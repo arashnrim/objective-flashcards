@@ -6,6 +6,7 @@
 //
 
 #import "HomeViewController.h"
+#import "../Views/DeckTableViewCell.h"
 
 @interface HomeViewController ()
 
@@ -34,8 +35,9 @@
 
 // Returns the table cell at the index specified. A required implementation under UITableView.
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    DeckTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    
+    cell.labelTitle.text = [NSString stringWithFormat:@"Cell %ld", (long)indexPath.row];
 //    cell.textLabel.text = [NSString stringWithFormat:@"Cell %ld", (long)indexPath.row];
     
     return cell;

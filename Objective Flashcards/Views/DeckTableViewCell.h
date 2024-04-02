@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DeckTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIView *viewDeck;
+@property (weak, nonatomic) IBOutlet UILabel *labelTitle;
+@property (weak, nonatomic) IBOutlet UILabel *labelDescription;
+@property (weak, nonatomic) IBOutlet UILabel *labelCount;
 
 @end
 

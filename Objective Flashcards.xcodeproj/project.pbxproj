@@ -17,7 +17,6 @@
 		49CF993A2BB6B6790055FA2A /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF99392BB6B6790055FA2A /* SceneDelegate.m */; };
 		49CF993D2BB6B67A0055FA2A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF993C2BB6B67A0055FA2A /* HomeViewController.m */; };
 		49CF99402BB6B67A0055FA2A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 49CF993F2BB6B67A0055FA2A /* Base */; };
-		49CF99432BB6B67A0055FA2A /* Objective_Flashcards.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49CF99412BB6B67A0055FA2A /* Objective_Flashcards.xcdatamodeld */; };
 		49CF99452BB6B67B0055FA2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49CF99442BB6B67B0055FA2A /* Assets.xcassets */; };
 		49CF99482BB6B67B0055FA2A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 49CF99472BB6B67B0055FA2A /* Base */; };
 		49CF994B2BB6B67B0055FA2A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF994A2BB6B67B0055FA2A /* main.m */; };
@@ -44,7 +43,6 @@
 		49CF993B2BB6B6790055FA2A /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		49CF993C2BB6B67A0055FA2A /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		49CF993F2BB6B67A0055FA2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		49CF99422BB6B67A0055FA2A /* Objective_Flashcards.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Objective_Flashcards.xcdatamodel; sourceTree = "<group>"; };
 		49CF99442BB6B67B0055FA2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49CF99472BB6B67B0055FA2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49CF99492BB6B67B0055FA2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 				49CF99442BB6B67B0055FA2A /* Assets.xcassets */,
 				49CF99492BB6B67B0055FA2A /* Info.plist */,
 				49CF994A2BB6B67B0055FA2A /* main.m */,
-				49CF99412BB6B67A0055FA2A /* Objective_Flashcards.xcdatamodeld */,
 			);
 			path = "Objective Flashcards";
 			sourceTree = "<group>";
@@ -211,7 +208,6 @@
 				49CF994B2BB6B67B0055FA2A /* main.m in Sources */,
 				49CF993D2BB6B67A0055FA2A /* HomeViewController.m in Sources */,
 				49CF99372BB6B6790055FA2A /* AppDelegate.m in Sources */,
-				49CF99432BB6B67A0055FA2A /* Objective_Flashcards.xcdatamodeld in Sources */,
 				49104B3E2BBBE96F00FA885C /* Card+CoreDataClass.m in Sources */,
 				49104B3F2BBBE96F00FA885C /* Card+CoreDataProperties.m in Sources */,
 				49CF993A2BB6B6790055FA2A /* SceneDelegate.m in Sources */,
@@ -450,16 +446,6 @@
 			);
 			currentVersion = 49104B312BBBE1EA00FA885C /* Deck.xcdatamodel */;
 			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		49CF99412BB6B67A0055FA2A /* Objective_Flashcards.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				49CF99422BB6B67A0055FA2A /* Objective_Flashcards.xcdatamodel */,
-			);
-			currentVersion = 49CF99422BB6B67A0055FA2A /* Objective_Flashcards.xcdatamodel */;
-			path = Objective_Flashcards.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

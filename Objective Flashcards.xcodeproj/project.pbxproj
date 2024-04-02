@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		49104B2D2BBBA8BA00FA885C /* DeckTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49104B2C2BBBA8BA00FA885C /* DeckTableViewCell.m */; };
+		49104B332BBBE1EA00FA885C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49104B302BBBE1EA00FA885C /* Model.xcdatamodeld */; };
+		49104B382BBBE93C00FA885C /* Deck+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 49104B362BBBE93C00FA885C /* Deck+CoreDataClass.m */; };
+		49104B392BBBE93C00FA885C /* Deck+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 49104B372BBBE93C00FA885C /* Deck+CoreDataProperties.m */; };
+		49104B3E2BBBE96F00FA885C /* Card+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 49104B3C2BBBE96F00FA885C /* Card+CoreDataClass.m */; };
+		49104B3F2BBBE96F00FA885C /* Card+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 49104B3D2BBBE96F00FA885C /* Card+CoreDataProperties.m */; };
 		49CF99372BB6B6790055FA2A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF99362BB6B6790055FA2A /* AppDelegate.m */; };
 		49CF993A2BB6B6790055FA2A /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF99392BB6B6790055FA2A /* SceneDelegate.m */; };
 		49CF993D2BB6B67A0055FA2A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF993C2BB6B67A0055FA2A /* HomeViewController.m */; };
@@ -21,6 +26,16 @@
 /* Begin PBXFileReference section */
 		49104B2B2BBBA8BA00FA885C /* DeckTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeckTableViewCell.h; sourceTree = "<group>"; };
 		49104B2C2BBBA8BA00FA885C /* DeckTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeckTableViewCell.m; sourceTree = "<group>"; };
+		49104B2F2BBBE1EA00FA885C /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		49104B312BBBE1EA00FA885C /* Deck.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Deck.xcdatamodel; sourceTree = "<group>"; };
+		49104B342BBBE93C00FA885C /* Deck+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Deck+CoreDataProperties.h"; sourceTree = "<group>"; };
+		49104B352BBBE93C00FA885C /* Deck+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Deck+CoreDataClass.h"; sourceTree = "<group>"; };
+		49104B362BBBE93C00FA885C /* Deck+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Deck+CoreDataClass.m"; sourceTree = "<group>"; };
+		49104B372BBBE93C00FA885C /* Deck+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Deck+CoreDataProperties.m"; sourceTree = "<group>"; };
+		49104B3A2BBBE96F00FA885C /* Card+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Card+CoreDataProperties.h"; sourceTree = "<group>"; };
+		49104B3B2BBBE96F00FA885C /* Card+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Card+CoreDataClass.h"; sourceTree = "<group>"; };
+		49104B3C2BBBE96F00FA885C /* Card+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Card+CoreDataClass.m"; sourceTree = "<group>"; };
+		49104B3D2BBBE96F00FA885C /* Card+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Card+CoreDataProperties.m"; sourceTree = "<group>"; };
 		49CF99322BB6B6790055FA2A /* Objective Flashcards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Objective Flashcards.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49CF99352BB6B6790055FA2A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		49CF99362BB6B6790055FA2A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -61,6 +76,15 @@
 		4960845A2BBA9A17009322EA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				49104B302BBBE1EA00FA885C /* Model.xcdatamodeld */,
+				49104B3A2BBBE96F00FA885C /* Card+CoreDataProperties.h */,
+				49104B3B2BBBE96F00FA885C /* Card+CoreDataClass.h */,
+				49104B3C2BBBE96F00FA885C /* Card+CoreDataClass.m */,
+				49104B3D2BBBE96F00FA885C /* Card+CoreDataProperties.m */,
+				49104B342BBBE93C00FA885C /* Deck+CoreDataProperties.h */,
+				49104B352BBBE93C00FA885C /* Deck+CoreDataClass.h */,
+				49104B362BBBE93C00FA885C /* Deck+CoreDataClass.m */,
+				49104B372BBBE93C00FA885C /* Deck+CoreDataProperties.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -96,6 +120,7 @@
 				4960845B2BBA9A20009322EA /* Controllers */,
 				4960845A2BBA9A17009322EA /* Models */,
 				496084592BBA9A0F009322EA /* Views */,
+				49104B2F2BBBE1EA00FA885C /* BridgingHeader.h */,
 				49CF99352BB6B6790055FA2A /* AppDelegate.h */,
 				49CF99362BB6B6790055FA2A /* AppDelegate.m */,
 				49CF99382BB6B6790055FA2A /* SceneDelegate.h */,
@@ -179,11 +204,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49104B382BBBE93C00FA885C /* Deck+CoreDataClass.m in Sources */,
+				49104B392BBBE93C00FA885C /* Deck+CoreDataProperties.m in Sources */,
+				49104B332BBBE1EA00FA885C /* Model.xcdatamodeld in Sources */,
 				49104B2D2BBBA8BA00FA885C /* DeckTableViewCell.m in Sources */,
 				49CF994B2BB6B67B0055FA2A /* main.m in Sources */,
 				49CF993D2BB6B67A0055FA2A /* HomeViewController.m in Sources */,
 				49CF99372BB6B6790055FA2A /* AppDelegate.m in Sources */,
 				49CF99432BB6B67A0055FA2A /* Objective_Flashcards.xcdatamodeld in Sources */,
+				49104B3E2BBBE96F00FA885C /* Card+CoreDataClass.m in Sources */,
+				49104B3F2BBBE96F00FA885C /* Card+CoreDataProperties.m in Sources */,
 				49CF993A2BB6B6790055FA2A /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,6 +298,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
@@ -322,6 +353,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -350,7 +382,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.arash.dev.Objective-Flashcards";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Objective Flashcards/Models/Objective Flashcards-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Objective Flashcards/BridgingHeader.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -381,7 +413,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.arash.dev.Objective-Flashcards";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Objective Flashcards/Models/Objective Flashcards-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Objective Flashcards/BridgingHeader.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -411,6 +443,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		49104B302BBBE1EA00FA885C /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				49104B312BBBE1EA00FA885C /* Deck.xcdatamodel */,
+			);
+			currentVersion = 49104B312BBBE1EA00FA885C /* Deck.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		49CF99412BB6B67A0055FA2A /* Objective_Flashcards.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

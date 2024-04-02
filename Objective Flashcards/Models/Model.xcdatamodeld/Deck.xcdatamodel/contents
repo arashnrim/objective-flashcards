@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23E224" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Card" representedClassName="Card" syncable="YES" codeGenerationType="class">
+        <attribute name="backText" optional="YES" attributeType="String"/>
+        <attribute name="frontText" optional="YES" attributeType="String"/>
+        <relationship name="memberOf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Deck" inverseName="contains" inverseEntity="Deck"/>
+    </entity>
+    <entity name="Deck" representedClassName="Deck" syncable="YES" codeGenerationType="class">
+        <attribute name="deckDescription" optional="YES" attributeType="String"/>
+        <attribute name="deckTitle" optional="YES" attributeType="String"/>
+        <relationship name="contains" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card" inverseName="memberOf" inverseEntity="Card"/>
+    </entity>
+</model>

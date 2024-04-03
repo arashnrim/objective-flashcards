@@ -12,6 +12,9 @@
 
 @interface DeckViewController ()
 
+@property (atomic, weak) NSManagedObjectContext *context;
+@property (atomic, weak) Deck *selectedDeck;
+
 @end
 
 @implementation DeckViewController
@@ -19,39 +22,74 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    Deck *selectedDeck = [self getDeckByID:self.selectedDeckId];
-    self.navigationItem.title = selectedDeck.deckTitle;
+     _context = ((AppDelegate *)UIApplication.sharedApplication.delegate).persistentContainer.viewContext;
+    _selectedDeck = [self getDeckByID:self.selectedDeckID];
     
+    // Sets the title of the navigation bar to match the deck's title
+    self.navigationItem.title = _selectedDeck.deckTitle;
+    
+    // Adds a button at the top right with an alert to create a deck
     UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"New Card" style:UIBarButtonItemStyleDone target:self action:@selector(createCard)];
     self.navigationItem.rightBarButtonItem = button;
 }
 
 #pragma mark - Methods
 
+/// Retrieves the corresponding `Deck` associated with the specified `deckID`.
+///
+/// - Parameter deckID: An `NSManagedObjectID` representing the ID of the deck to be returned.
+///
+/// - Returns: Either the `Deck` in its entirety if it's known by the context, a fault that represents a `Deck` otherwise, or `nil` if there is an exception.
+///
+/// - SeeAlso: [objectWithID](https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/1506197-objectwithid)
 - (Deck *)getDeckByID:(NSManagedObjectID *)deckID {
     Deck *deck;
     
-    NSManagedObjectContext *context = ((AppDelegate *)UIApplication.sharedApplication.delegate).persistentContainer.viewContext;
-    deck = [context objectWithID:deckID];
+    if (!_context) {
+        NSLog(@"_context is null, meaning that the Core Data stack is misconfigured. Evaluate immediately.");
+        return nil;
+    }
     
+    deck = [_context objectWithID:deckID];
     return deck;
 }
 
-- (NSMutableArray *)getCardsForDeckWithID: (NSManagedObjectID *)deckID {
+/// Retrieves the `Card`s associated with the currently selected `Deck` through the `"contains"` relationship.
+///
+/// - Returns: An `NSMutableArray` containing either entire `Card`s if known by the context, faults that represent `Card`s otherwise, or `nil` if there is an exception.
+///
+/// - SeeAlso: [objectWithID](https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/1506197-objectwithid)
+- (NSMutableArray *)getDeckCards {
     NSMutableArray *cards = [NSMutableArray new];
     
-    NSManagedObjectContext *context = ((AppDelegate *)UIApplication.sharedApplication.delegate).persistentContainer.viewContext;
-    Deck *deck = [self getDeckByID:self.selectedDeckId];
-    NSArray *cardIDs = [deck objectIDsForRelationshipNamed:@"contains"];
+    if (!_selectedDeck) {
+        NSLog(@"_selectedDeck is null, meaning that the currently selected deck is abnormal. Evaluate immediately.");
+        return cards;
+    }
+    if (!_context) {
+        NSLog(@"_context is null, meaning that the Core Data stack is misconfigured. Evaluate immediately.");
+        return cards;
+    }
     
+    NSArray *cardIDs = [_selectedDeck objectIDsForRelationshipNamed:@"contains"];
     for (int i = 0; i < cardIDs.count; i++) {
-        [cards addObject:[context objectWithID:cardIDs[i]]];
+        [cards addObject:[_context objectWithID:cardIDs[i]]];
     }
     
     return cards;
 }
 
+/// Displays an alert to capture information and save a flashcard deck.
 - (void)createCard {
+    if (!_selectedDeck) {
+        NSLog(@"_selectedDeck is null, meaning that the currently selected deck is abnormal. Evaluate immediately.");
+        return;
+    }
+    if (!_context) {
+        NSLog(@"_context is null, meaning that the Core Data stack is misconfigured. Evaluate immediately.");
+        return;
+    }
+    
     UIAlertController *alert = [UIAlertController
                                 alertControllerWithTitle:@"New Card"
                                 message:@"What would you like on the front (what's shown first) and back (the answer to be revealed later) of the card?"
@@ -66,16 +104,14 @@
     
     UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *actionCreate = [UIAlertAction actionWithTitle:@"Create" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSManagedObjectContext *context = ((AppDelegate *)UIApplication.sharedApplication.delegate).persistentContainer.viewContext;
-        Card *card = [[Card alloc] initWithContext:context];
-        Deck *deck = [self getDeckByID:self.selectedDeckId];
+        Card *card = [[Card alloc] initWithContext:self->_context];
         
         card.frontText = alert.textFields[0].text;
         card.backText = alert.textFields[1].text;
-        card.memberOf = [self getDeckByID:self.selectedDeckId];
-        [deck addContainsObject:card];
+        card.memberOf = [self getDeckByID:self.selectedDeckID];
+        [self->_selectedDeck addContainsObject:card];
         
-        [context save:nil];
+        [self->_context save:nil];
         [self.tableView reloadData];
     }];
     [alert addAction:actionCancel];
@@ -87,13 +123,13 @@
 #pragma mark - Table view methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self getCardsForDeckWithID:self.selectedDeckId].count;
+    return [self getDeckCards].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
-    Card *card = [self getCardsForDeckWithID:self.selectedDeckId][indexPath.row];
+    Card *card = [self getDeckCards][indexPath.row];
     cell.textLabel.text = card.frontText;
     cell.detailTextLabel.text = card.backText;
     

@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DeckViewController : UITableViewController
 
-@property (nonatomic) NSManagedObjectID* selectedDeckId;
+@property (nonatomic) NSManagedObjectID* selectedDeckID;
 
 @end
 

@@ -13,7 +13,7 @@
 
 @interface HomeViewController ()
 
-@property (atomic) NSManagedObjectID* selectedDeckID;
+@property (atomic, weak) NSManagedObjectContext *context;
 
 @end
 
@@ -25,6 +25,9 @@
     // Encourages the app to have large titles where possible
     self.navigationController.navigationBar.prefersLargeTitles = YES;
     
+    // Defines the managed object context for interacting with the Core Data stack
+    _context = ((AppDelegate *)UIApplication.sharedApplication.delegate).persistentContainer.viewContext;
+    
     // Sets the delegate and data source of the table view to the VC
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -34,28 +37,35 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     // Adds a button at the top right with an alert to create a deck
-    UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"New Deck" style:UIBarButtonItemStylePlain target:self action:@selector(createDecks)];
+    UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"New Deck" style:UIBarButtonItemStylePlain target:self action:@selector(createDeck)];
     self.navigationItem.rightBarButtonItem = button;
 }
 
-
-
+// Configures the destination View Controller (DeckViewController) before the segue is performed
+// Gives us an opportunity to pass any data we need to to the new VC
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqual: @"segueEditDeck"]) {
         DeckViewController *vc = (DeckViewController *)segue.destinationViewController;
-        vc.selectedDeckId = sender;
+        vc.selectedDeckID = sender;
     }
 }
 
 #pragma mark - Methods
 
+/// Retrieves the flashcard decks saved on the user's device through persistence.
+///
+/// - Returns: An `NSMutableArray` of `Deck`s representing the flashcard decks that the user has saved.
 -(NSMutableArray *)getDecks {
-    NSMutableArray *decks;
+    NSMutableArray *decks = [NSMutableArray new];
     
-    NSManagedObjectContext *context = ((AppDelegate *)UIApplication.sharedApplication.delegate).persistentContainer.viewContext;
+    if (!_context) {
+        NSLog(@"_context is null, meaning that the Core Data stack is misconfigured. Evaluate immediately.");
+        return decks;
+    }
+    
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Deck"];
     NSError *error;
-    decks = [[context executeFetchRequest:request error:&error] mutableCopy];
+    decks = [[_context executeFetchRequest:request error:&error] mutableCopy];
     
     if (error) {
         UIAlertController *alert = [UIAlertController
@@ -72,7 +82,13 @@
     return decks;
 }
 
--(void)createDecks {
+/// Displays an alert to capture information and save a flashcard deck.
+-(void)createDeck {
+    if (!_context) {
+        NSLog(@"_context is null, meaning that the Core Data stack is misconfigured. Evaluate immediately.");
+        return;
+    }
+    
     UIAlertController *alert = [UIAlertController
                                 alertControllerWithTitle:@"New Desk"
                                 message:@"What would you like to call your desk, and what's it about?"
@@ -87,15 +103,14 @@
     
     UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *actionCreate = [UIAlertAction actionWithTitle:@"Create" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSManagedObjectContext *context = ((AppDelegate *)UIApplication.sharedApplication.delegate).persistentContainer.viewContext;
-        Deck *newDeck = [[Deck alloc] initWithContext:context];
+        Deck *newDeck = [[Deck alloc] initWithContext:self->_context];
         
         UITextField *textFieldDeckTitle = alert.textFields[0];
         UITextField *textFieldDescriptionTitle = alert.textFields[1];
         newDeck.deckTitle = textFieldDeckTitle.text;
         newDeck.deckDescription = textFieldDescriptionTitle.text;
         
-        [context save:nil];
+        [self->_context save:nil];
         [self.tableView reloadData];
         NSLog(@"Created deck with title \"%@\" and description \"%@\".", textFieldDeckTitle.text, textFieldDescriptionTitle.text);
     }];

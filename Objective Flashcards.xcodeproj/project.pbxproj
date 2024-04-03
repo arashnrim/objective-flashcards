@@ -16,6 +16,7 @@
 		49CF99452BB6B67B0055FA2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49CF99442BB6B67B0055FA2A /* Assets.xcassets */; };
 		49CF99482BB6B67B0055FA2A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 49CF99472BB6B67B0055FA2A /* Base */; };
 		49CF994B2BB6B67B0055FA2A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF994A2BB6B67B0055FA2A /* main.m */; };
+		49FD589B2BBD0775009E5366 /* DeckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FD589A2BBD0775009E5366 /* DeckViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		49CF99472BB6B67B0055FA2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49CF99492BB6B67B0055FA2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49CF994A2BB6B67B0055FA2A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		49FD58992BBD0775009E5366 /* DeckViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeckViewController.h; sourceTree = "<group>"; };
+		49FD589A2BBD0775009E5366 /* DeckViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeckViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +74,8 @@
 			children = (
 				49CF993B2BB6B6790055FA2A /* HomeViewController.h */,
 				49CF993C2BB6B67A0055FA2A /* HomeViewController.m */,
+				49FD58992BBD0775009E5366 /* DeckViewController.h */,
+				49FD589A2BBD0775009E5366 /* DeckViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 			files = (
 				49104B332BBBE1EA00FA885C /* Model.xcdatamodeld in Sources */,
 				49104B2D2BBBA8BA00FA885C /* DeckTableViewCell.m in Sources */,
+				49FD589B2BBD0775009E5366 /* DeckViewController.m in Sources */,
 				49CF994B2BB6B67B0055FA2A /* main.m in Sources */,
 				49CF993D2BB6B67A0055FA2A /* HomeViewController.m in Sources */,
 				49CF99372BB6B6790055FA2A /* AppDelegate.m in Sources */,

@@ -8,6 +8,6 @@
     <entity name="Deck" representedClassName="Deck" syncable="YES" codeGenerationType="class">
         <attribute name="deckDescription" optional="YES" attributeType="String"/>
         <attribute name="deckTitle" optional="YES" attributeType="String"/>
-        <relationship name="contains" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card" inverseName="memberOf" inverseEntity="Card"/>
+        <relationship name="contains" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Card" inverseName="memberOf" inverseEntity="Card"/>
     </entity>
 </model>

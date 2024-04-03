@@ -9,8 +9,11 @@
 #import "../Views/DeckTableViewCell.h"
 #import "../AppDelegate.h"
 #import "Deck+CoreDataClass.h"
+#import "DeckViewController.h"
 
 @interface HomeViewController ()
+
+@property (atomic) NSManagedObjectID* selectedDeckID;
 
 @end
 
@@ -34,6 +37,17 @@
     UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"New Deck" style:UIBarButtonItemStylePlain target:self action:@selector(createDecks)];
     self.navigationItem.rightBarButtonItem = button;
 }
+
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqual: @"segueEditDeck"]) {
+        DeckViewController *vc = (DeckViewController *)segue.destinationViewController;
+        vc.selectedDeckId = sender;
+    }
+}
+
+#pragma mark - Methods
 
 -(NSMutableArray *)getDecks {
     NSMutableArray *decks;
@@ -92,6 +106,8 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+#pragma mark - Table view methods
+
 // Determines the number of rows to fill in the table view. A required implementation under UITableViewDataSource.
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self getDecks].count;
@@ -109,8 +125,23 @@
 
 // Handles the event when users tap the row at the index specified.
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO: Handle flashcard deck selection
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:@"What would you like to do with this deck?"
+                                message:@"You can choose to edit the deck or review it now."
+                                preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *actionEdit = [UIAlertAction actionWithTitle:@"Edit this deck" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self performSegueWithIdentifier:@"segueEditDeck" sender:((Deck *)[self getDecks][indexPath.row]).objectID];
+    }];
+    UIAlertAction *actionReview = [UIAlertAction actionWithTitle:@"Review this deck" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // TODO: Handle this interaction
+    }];
+    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alert addAction:actionEdit];
+    [alert addAction:actionReview];
+    [alert addAction:actionCancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
-
 
 @end

@@ -40,7 +40,20 @@
     
     NSManagedObjectContext *context = ((AppDelegate *)UIApplication.sharedApplication.delegate).persistentContainer.viewContext;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Deck"];
-    decks = [[context executeFetchRequest:request error:nil] mutableCopy];
+    NSError *error;
+    decks = [[context executeFetchRequest:request error:&error] mutableCopy];
+    
+    if (error) {
+        UIAlertController *alert = [UIAlertController
+                                    alertControllerWithTitle:@"Something went wrong."
+                                    message:[NSString stringWithFormat:@"%@. %@", error.localizedDescription, error.localizedFailureReason ? error.localizedFailureReason : @"Please try again."]
+                                    preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:actionOk];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
     
     return decks;
 }
@@ -60,8 +73,6 @@
     
     UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *actionCreate = [UIAlertAction actionWithTitle:@"Create" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        // TODO: Add functionality here
-        
         NSManagedObjectContext *context = ((AppDelegate *)UIApplication.sharedApplication.delegate).persistentContainer.viewContext;
         Deck *newDeck = [[Deck alloc] initWithContext:context];
         

@@ -62,7 +62,6 @@
 		4960845A2BBA9A17009322EA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				49104B302BBBE1EA00FA885C /* Model.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -106,6 +105,7 @@
 				49CF99442BB6B67B0055FA2A /* Assets.xcassets */,
 				49CF99492BB6B67B0055FA2A /* Info.plist */,
 				49CF994A2BB6B67B0055FA2A /* main.m */,
+				49104B302BBBE1EA00FA885C /* Model.xcdatamodeld */,
 			);
 			path = "Objective Flashcards";
 			sourceTree = "<group>";

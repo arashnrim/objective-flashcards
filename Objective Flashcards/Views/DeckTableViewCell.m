@@ -13,7 +13,7 @@
     [super awakeFromNib];
     // Initialization code
     
-    _viewDeck.layer.cornerRadius = 5.0;
+    _viewDeck.layer.cornerRadius = 10.0;
 //    _stackViewDeck.layoutMarginsRelativeArrangement = YES;
 //    _stackViewDeck.layoutMargins = UIEdgeInsetsMake(0.0, 16.0, 0.0, 16.0);
 }

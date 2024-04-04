@@ -10,10 +10,12 @@
 #import "../AppDelegate.h"
 #import "Deck+CoreDataClass.h"
 #import "DeckViewController.h"
+#import "../Data/CoreDataManager.h"
 
 @interface HomeViewController ()
 
-@property (atomic, weak) NSManagedObjectContext *context;
+@property (atomic) NSManagedObjectContext *context;
+@property (atomic) CoreDataManager *manager;
 
 @end
 
@@ -27,6 +29,7 @@
     
     // Defines the managed object context for interacting with the Core Data stack
     _context = ((AppDelegate *)UIApplication.sharedApplication.delegate).persistentContainer.viewContext;
+    _manager = [[CoreDataManager alloc] initWithContext:_context];
     
     // Sets the delegate and data source of the table view to the VC
     self.tableView.delegate = self;
@@ -52,38 +55,8 @@
 
 #pragma mark - Methods
 
-/// Retrieves the flashcard decks saved on the user's device through persistence.
-///
-/// - Returns: An `NSMutableArray` of `Deck`s representing the flashcard decks that the user has saved.
--(NSMutableArray *)getDecks {
-    NSMutableArray *decks = [NSMutableArray new];
-    
-    if (!_context) {
-        NSLog(@"_context is null, meaning that the Core Data stack is misconfigured. Evaluate immediately.");
-        return decks;
-    }
-    
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Deck"];
-    NSError *error;
-    decks = [[_context executeFetchRequest:request error:&error] mutableCopy];
-    
-    if (error) {
-        UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Something went wrong."
-                                    message:[NSString stringWithFormat:@"%@. %@", error.localizedDescription, error.localizedFailureReason ? error.localizedFailureReason : @"Please try again."]
-                                    preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-        [alert addAction:actionOk];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-    
-    return decks;
-}
-
 /// Displays an alert to capture information and save a flashcard deck.
--(void)createDeck {
+- (void)createDeck {
     if (!_context) {
         NSLog(@"_context is null, meaning that the Core Data stack is misconfigured. Evaluate immediately.");
         return;
@@ -125,15 +98,19 @@
 
 // Determines the number of rows to fill in the table view. A required implementation under UITableViewDataSource.
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self getDecks].count;
+    return [_manager getDecks].count;
 }
 
 // Returns the table cell at the index specified. A required implementation under UITableView.
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DeckTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    Deck *selectedDeck = (Deck *)[_manager getDecks][indexPath.row];
     
-    cell.labelTitle.text = ((Deck *)[self getDecks][indexPath.row]).deckTitle;
-    cell.labelDescription.text = ((Deck *)[self getDecks][indexPath.row]).deckDescription;
+    cell.labelTitle.text = selectedDeck.deckTitle;
+    cell.labelDescription.text = selectedDeck.deckDescription;
+    
+    NSMutableArray *selectedDeckCards = [_manager getCardsForDeckWithID:[selectedDeck objectID]];
+    cell.labelCount.text = [NSString stringWithFormat:@"%lu card%s", (unsigned long)selectedDeckCards.count, selectedDeckCards.count == 1 ? "" : "s"];
     
     return cell;
 }
@@ -145,7 +122,7 @@
                                 message:@"You can choose to edit the deck or review it now."
                                 preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *actionEdit = [UIAlertAction actionWithTitle:@"Edit this deck" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self performSegueWithIdentifier:@"segueEditDeck" sender:((Deck *)[self getDecks][indexPath.row]).objectID];
+        [self performSegueWithIdentifier:@"segueEditDeck" sender:((Deck *)[self->_manager getDecks][indexPath.row]).objectID];
     }];
     UIAlertAction *actionReview = [UIAlertAction actionWithTitle:@"Review this deck" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         // TODO: Handle this interaction
@@ -166,7 +143,7 @@
             return;
         }
         
-        Deck *deck = [self getDecks][indexPath.row];
+        Deck *deck = [_manager getDecks][indexPath.row];
         
         // TODO: Implement deleting the deck's cards in parallel
 //        [_context deleteObject:deck];

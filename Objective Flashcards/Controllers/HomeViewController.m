@@ -53,6 +53,12 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.tableView reloadData];
+}
+
 #pragma mark - Methods
 
 /// Displays an alert to capture information and save a flashcard deck.
@@ -144,11 +150,15 @@
         }
         
         Deck *deck = [_manager getDecks][indexPath.row];
+        NSMutableArray *itemsToDelete = [_manager getCardsForDeckWithID:[deck objectID]];
+        [itemsToDelete addObject:deck];
         
-        // TODO: Implement deleting the deck's cards in parallel
-//        [_context deleteObject:deck];
-//        [_context save:nil];
+        for (NSManagedObject *item in itemsToDelete) {
+            [_context deleteObject:item];
+            NSLog(@"Deleting %@...", item.description);
+        }
         
+        [_context save:nil];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }

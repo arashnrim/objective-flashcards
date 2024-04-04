@@ -25,11 +25,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
     _context = ((AppDelegate *)UIApplication.sharedApplication.delegate).persistentContainer.viewContext;
     _manager = [[CoreDataManager alloc] initWithContext:_context];
     
     _selectedDeck = [_manager getDeckByID:_selectedDeckID];
-    _cards = [_manager getCardsForDeckWithID:_selectedDeckID];
     
     // Sets the title of the navigation bar to match the deck's title
     self.navigationItem.title = _selectedDeck.deckTitle;
@@ -85,13 +87,13 @@
 #pragma mark - Table view methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _cards.count;
+    return [_manager getCardsForDeckWithID:_selectedDeckID].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
-    Card *card = _cards[indexPath.row];
+    Card *card = [_manager getCardsForDeckWithID:_selectedDeckID][indexPath.row];
     cell.textLabel.text = card.frontText;
     cell.detailTextLabel.text = card.backText;
     
@@ -105,7 +107,7 @@
             return;
         }
         
-        Card *card = _cards[indexPath.row];
+        Card *card = [_manager getCardsForDeckWithID:_selectedDeckID][indexPath.row];
         [_context deleteObject:card];
         [_context save:nil];
         

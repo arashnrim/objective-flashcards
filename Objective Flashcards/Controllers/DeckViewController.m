@@ -136,4 +136,20 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        if (!_selectedDeck) _selectedDeck = [self getDeckByID:_selectedDeckID];
+        if (!_context) {
+            NSLog(@"_context is null, meaning that the Core Data stack is misconfigured. Evaluate immediately.");
+            return;
+        }
+        
+        Card *card = [self getDeckCards][indexPath.row];
+        [_context deleteObject:card];
+        [_context save:nil];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
 @end

@@ -159,4 +159,21 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        if (!_context) {
+            NSLog(@"_context is null, meaning that the Core Data stack is misconfigured. Evaluate immediately.");
+            return;
+        }
+        
+        Deck *deck = [self getDecks][indexPath.row];
+        
+        // TODO: Implement deleting the deck's cards in parallel
+//        [_context deleteObject:deck];
+//        [_context save:nil];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
 @end

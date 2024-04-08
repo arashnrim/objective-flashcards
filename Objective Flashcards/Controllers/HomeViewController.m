@@ -10,6 +10,7 @@
 #import "../AppDelegate.h"
 #import "Deck+CoreDataClass.h"
 #import "DeckViewController.h"
+#import "ReviewViewController.h"
 #import "../Data/CoreDataManager.h"
 
 @interface HomeViewController ()
@@ -49,6 +50,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqual: @"segueEditDeck"]) {
         DeckViewController *vc = (DeckViewController *)segue.destinationViewController;
+        vc.selectedDeckID = sender;
+    } else if ([segue.identifier isEqual:@"segueReviewDeck"]) {
+        ReviewViewController *vc = (ReviewViewController *)segue.destinationViewController;
         vc.selectedDeckID = sender;
     }
 }
@@ -131,7 +135,7 @@
         [self performSegueWithIdentifier:@"segueEditDeck" sender:((Deck *)[self->_manager getDecks][indexPath.row]).objectID];
     }];
     UIAlertAction *actionReview = [UIAlertAction actionWithTitle:@"Review this deck" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        // TODO: Handle this interaction
+        [self performSegueWithIdentifier:@"segueReviewDeck" sender:((Deck *)[self->_manager getDecks][indexPath.row]).objectID];
     }];
     UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     
